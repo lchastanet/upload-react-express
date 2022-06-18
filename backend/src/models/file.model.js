@@ -23,3 +23,13 @@ exports.createOne = async (img) => {
     await prisma.$disconnect()
   }
 }
+
+exports.deleteOne = async (id) => {
+  try {
+    return await prisma.file_uploaded.delete({ where: { id } })
+  } catch (e) {
+    throw e
+  } finally {
+    await prisma.$disconnect()
+  }
+}

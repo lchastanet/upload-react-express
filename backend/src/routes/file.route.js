@@ -7,5 +7,6 @@ const router = express.Router()
 
 router.post("/", multer, fileController.addOne)
 router.get("/", fileController.getAll)
+router.delete("/", fileController.deleteOne)
 
 module.exports = router
