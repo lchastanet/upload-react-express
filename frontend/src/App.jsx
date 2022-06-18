@@ -8,6 +8,17 @@ function App() {
 
   const handleForm = (e) => {
     e.preventDefault()
+
+    const formData = new FormData()
+
+    formData.append("file", file)
+    formData.append("name", name)
+
+    axios.post("http://localhost:8000/file", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
   }
 
   return (

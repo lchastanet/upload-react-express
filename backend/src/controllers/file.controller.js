@@ -1,5 +1,13 @@
 const fileModel = require("../models/file.model")
 
-exports.getAll = (req, res) => {}
+exports.addOne = async (req, res) => {
+  if (!req.file) {
+    res.sendStatus(400)
+  } else {
+    console.log(req.body)
+    res.sendStatus(200)
+    //const data = await fileModel.createOne()
+  }
+}
 
-exports.addOne = (req, res) => {}
+exports.getAll = (req, res) => {}
