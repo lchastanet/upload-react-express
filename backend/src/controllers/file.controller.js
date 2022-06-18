@@ -10,7 +10,7 @@ exports.addOne = async (req, res) => {
       name: req.body.name,
       file_path: req.file.filename,
     })
-    console.log(data)
+
     res.sendStatus(200)
   }
 }
@@ -19,7 +19,6 @@ exports.deleteOne = async (req, res) => {
   const id = parseInt(req.query.id)
   const removed = await fileModel.deleteOne(id)
 
-  console.log(removed)
   await fs.promises.unlink(
     path.join(__dirname, `../../public/uploads/${removed.file_path}`)
   )
