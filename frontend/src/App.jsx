@@ -1,28 +1,10 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
-import { useEffect } from "react"
+
+import Form from "./components/Form"
 
 function App() {
-  const [files, setFiles] = useState([])
-  const [name, setName] = useState("")
   const [filesDisplay, setFilesDisplay] = useState([])
-
-  const handleForm = (e) => {
-    e.preventDefault()
-
-    const formData = new FormData()
-
-    formData.append("file", files[0])
-    formData.append("name", name)
-
-    axios
-      .post("http://localhost:8000/file", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => setFilesDisplay([]))
-  }
 
   const handleDelete = (e) => {
     const id = e.target.getAttribute("data-id")
@@ -40,30 +22,7 @@ function App() {
 
   return (
     <div className="d-flex flex-column mt-5 justify-content-center align-items-center">
-      <form onSubmit={handleForm} className="w-40">
-        <div className="form-group mb-2">
-          <label htmlFor="inputName">Nom</label>
-          <input
-            onChange={(e) => setName(e.target.value)}
-            className="form-control"
-            name="inputName"
-            type="text"
-          />
-        </div>
-        <div className="form-group mb-4">
-          <label htmlFor="inputFile">Image</label>
-          <br />
-          <input
-            onChange={(e) => setFiles(e.target.files)}
-            className="form-control-file"
-            name="inputFile"
-            type="file"
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Envoyer
-        </button>
-      </form>
+      <Form setFilesDisplay={setFilesDisplay} />
       <div className="d-flex flex-row mt-5 justify-content-center">
         {filesDisplay.map((picture) => (
           <div key={picture.id} className="d-flex flex-column">
@@ -77,7 +36,6 @@ function App() {
               data-id={picture.id}
               onClick={handleDelete}
               className="btn btn-danger mx-3"
-              aria-hidden="true"
             >
               Supprimer
             </button>
